@@ -7,3 +7,6 @@ import '@angular/http';
 import '@angular/router';
 // RxJS
 import 'rxjs';
+// Materialize
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';

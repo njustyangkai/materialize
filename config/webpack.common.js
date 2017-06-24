@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 module.exports = {
     entry: {
@@ -21,7 +22,7 @@ module.exports = {
                 loaders: [
                     {
                         loader: 'awesome-typescript-loader',
-                        options: {configFileName: helpers.root('src', 'tsconfig.json')}
+                        options: { configFileName: helpers.root('src', 'tsconfig.json') }
                     }, 'angular2-template-loader'
                 ]
             },
@@ -42,7 +43,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap'})
+                loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
             },
             {
                 test: /\.css$/,
@@ -65,6 +66,11 @@ module.exports = {
 
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+
+        new ProvidePlugin({
+            'window.jQuery': 'jquery',
+            Hammer: 'hammerjs/hammer'
         })
     ]
 };
